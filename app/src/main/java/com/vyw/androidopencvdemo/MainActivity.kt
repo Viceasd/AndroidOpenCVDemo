@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
         val sigma = max(0.1F, sldSigma.progress / 10F)
 
         // This is the actual call to the blur method inside native-lib.cpp
-        this.blur(srcBitmap!!, dstBitmap!!, sigma)
+        this.canny(srcBitmap!!, dstBitmap!!, sigma)
     }
 
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
      */
     external fun stringFromJNI(): String
     external fun blur(bitmapIn: Bitmap, bitmapOut: Bitmap, sigma: Float)
+    external fun canny(bitmapIn: Bitmap, bitmapOut: Bitmap, sigma: Float)
     external fun flip(bitmapIn: Bitmap, bitmapOut: Bitmap)
 
     companion object {
