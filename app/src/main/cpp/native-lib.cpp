@@ -126,6 +126,6 @@ extern "C" JNIEXPORT void JNICALL
 Java_com_vyw_androidopencvdemo_MainActivity_canny(JNIEnv *env, jobject p_this, jobject bitmapIn, jobject bitmapOut, jfloat sigma){
     Mat src;
     bitmapToMat(env, bitmapIn, src, false);
-    myBlur(src, sigma);
+    myCanny(src, sigma);
     matToBitmap(env, src, bitmapOut, false);
 }
