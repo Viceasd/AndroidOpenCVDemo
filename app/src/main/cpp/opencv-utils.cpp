@@ -10,22 +10,16 @@ void myBlur(Mat src, float sigma) {
 }
 void myCanny(Mat src, float sigma){
 
-    Mat dst, detected_edges,src_gray,edge1,src_gray2,mask;
+    Mat dst, detected_edges,src_gray,edge,src_gray2,mask,gray;
 
     const int ratio = 3;
     const int kernel_size = 3;
 
-    dst.create( src.size(), src.type() );
-
-    cvtColor(src,src_gray,COLOR_BGR2GRAY);
-
-    blur( src_gray, detected_edges, Size(3,3) );
-
-    Canny( detected_edges, edge1, 0, 100, kernel_size );
-
-    dst = cv::Scalar(0);
-    src.copyTo( dst, edge1);
-    src.convertTo(src, dst.type());
+    cvtColor(src, gray, COLOR_RGB2GRAY);
+    blur( gray, gray, Size(3,3) );
+    Canny(gray, edge, (int)sigma, 100);
+    cvtColor(edge, dst, COLOR_GRAY2RGBA,4);
+    src = cv::Scalar(0);
     dst.copyTo(src);
 
 
