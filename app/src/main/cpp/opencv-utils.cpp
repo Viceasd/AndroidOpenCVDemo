@@ -6,24 +6,35 @@ void myFlip(Mat src) {
 }
 
 void myBlur(Mat src, float sigma) {
-    GaussianBlur(src, src, Size(), sigma);
-}
-void myCanny(Mat src, float sigma){
 
-    Mat dst, detected_edges,src_gray,edge,src_gray2,mask,gray;
+    Mat dst, detected_edges,src_gray,edge1;
 
     const int ratio = 3;
     const int kernel_size = 3;
 
-    cvtColor(src, gray, COLOR_RGB2GRAY);
-    blur( gray, gray, Size(3,3) );
-    Canny(gray, edge, (int)sigma, 100);
-    cvtColor(edge, dst, COLOR_GRAY2RGBA,4);
-    src = cv::Scalar(0);
+    cvtColor(src,src_gray,COLOR_BGR2GRAY );
+    blur( src_gray, detected_edges, Size(3,3) );
+
+    Canny( detected_edges, edge1, (int)sigma, ((int)sigma)*ratio, kernel_size );
+    dst = Scalar::all(0);
+    src.copyTo( dst, edge1);
     dst.copyTo(src);
 
 
+}
 
+void myCanny(Mat src, float sigma){
+    Mat dst, detected_edges,src_gray,edge1;
 
+    const int ratio = 3;
+    const int kernel_size = 3;
+
+    cvtColor(src,src_gray,COLOR_BGR2GRAY );
+    blur( src_gray, detected_edges, Size(3,3) );
+
+    Canny( detected_edges, edge1, (int)sigma, ((int)sigma)*ratio, kernel_size );
+    dst = Scalar::all(0);
+    src.copyTo( dst, edge1);
+    dst.copyTo(src);
 
 }

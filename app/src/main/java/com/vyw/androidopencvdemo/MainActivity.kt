@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
      * which is packaged with this application.
      */
     external fun stringFromJNI(): String
-    external fun blur(bitmapIn: Bitmap, bitmapOut: Bitmap, sigma: Float)
     external fun canny(bitmapIn: Bitmap, bitmapOut: Bitmap, sigma: Float)
     external fun flip(bitmapIn: Bitmap, bitmapOut: Bitmap)
 
